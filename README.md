@@ -35,7 +35,6 @@ Try asking any of these. The AI is trained on all my portfolio data.
 - **Language**: TypeScript
 - **UI**: Tailwind CSS & shadcn/ui
 - **State**: React Hooks & Context
-- **Deployment**: Vercel / Netlify / Azure Static Web Apps
 
 ---
 
@@ -127,13 +126,6 @@ npm run dev
 
 If you proxy requests through Next API routes, ensure the internal route in `app/(chat)/api/chat/route.ts` points to your backend.
 
----
-
-## Deployment
-
-- This is a standard Next.js app; deploy to any Node.js host (Vercel, Netlify, Azure Static Web Apps + SSR, etc.).
-- Set the same environment variables in your hosting platform.
-- Point the frontend to your backend URL (publicly reachable or private via the platform’s network).
 
 ---
 
