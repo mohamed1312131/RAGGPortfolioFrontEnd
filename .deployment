@@ -1,2 +1,5 @@
 [config]
 SCM_DO_BUILD_DURING_DEPLOYMENT=true
+PROJECT=.
+WEBSITE_NODE_DEFAULT_VERSION=20.19.3
+BUILD_COMMAND=pnpm install && pnpm run build
