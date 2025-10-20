@@ -4,11 +4,12 @@ import { useMemo } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { unstable_serialize } from "swr/infinite";
 import { updateChatVisibility } from "@/app/(chat)/actions";
-import {
-  type ChatHistory,
-  getChatHistoryPaginationKey,
-} from "@/components/sidebar-history";
-import type { VisibilityType } from "@/components/visibility-selector";
+import { getChatHistoryPaginationKey } from "@/components/sidebar-history";
+
+// Local minimal types to match demo implementation
+type VisibilityType = "private" | "public";
+type HistoryChat = { id: string; visibility: VisibilityType };
+type ChatHistory = { chats: HistoryChat[] };
 
 export function useChatVisibility({
   chatId,
@@ -18,7 +19,7 @@ export function useChatVisibility({
   initialVisibilityType: VisibilityType;
 }) {
   const { mutate, cache } = useSWRConfig();
-  const history: ChatHistory = cache.get("/api/history")?.data;
+  const history: ChatHistory | undefined = cache.get("/api/history")?.data;
 
   const { data: localVisibility, mutate: setLocalVisibility } = useSWR(
     `${chatId}-visibility`,
@@ -32,7 +33,9 @@ export function useChatVisibility({
     if (!history) {
       return localVisibility;
     }
-    const chat = history.chats.find((currentChat) => currentChat.id === chatId);
+    const chat = history.chats.find(
+      (currentChat: HistoryChat) => currentChat.id === chatId
+    );
     if (!chat) {
       return "private";
     }

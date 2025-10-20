@@ -71,14 +71,17 @@ export function getMostRecentUserMessage(messages: UIMessage[]) {
   return userMessages.at(-1);
 }
 
-export function getDocumentTimestampByIndex(
-  documents: Document[],
+export function getDocumentTimestampByIndex<T extends { createdAt?: Date | string | number }>(
+  documents: T[],
   index: number,
 ) {
   if (!documents) { return new Date(); }
-  if (index > documents.length) { return new Date(); }
+  if (index < 0 || index >= documents.length) { return new Date(); }
 
-  return documents[index].createdAt;
+  const createdAt = documents[index]?.createdAt;
+  if (!createdAt) { return new Date(); }
+
+  return createdAt instanceof Date ? createdAt : new Date(createdAt);
 }
 
 export function getTrailingMessageId({
