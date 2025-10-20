@@ -36,7 +36,8 @@ export async function POST(request: Request) {
     }
 
     // Forward the user's prompt to the Spring backend
-    const backendRes = await fetch("http://localhost:8080/api/chat/query", {
+    const baseUrl = process.env.BACKEND_BASE_URL ?? "https://raagchatbot-hxhscbcjbpc5dvc4.swedencentral-01.azurewebsites.net";
+    const backendRes = await fetch(`${baseUrl}/api/chat/query`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // Spring controller expects { history: [{ role, content }] }
