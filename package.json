@@ -15,7 +15,7 @@
     "db:pull": "drizzle-kit pull",
     "db:check": "drizzle-kit check",
     "db:up": "drizzle-kit up",
-    "test": "PLAYWRIGHT=True npx playwright test"
+    "test": "cross-env PLAYWRIGHT=true npx playwright test"
   },
   "dependencies": {
     "@ai-sdk/gateway": "^1.0.15",
@@ -96,6 +96,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "cross-env": "^10.1.0",
     "drizzle-kit": "^0.25.0",
     "postcss": "^8",
     "tailwindcss": "^4.1.13",
